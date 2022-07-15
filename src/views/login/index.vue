@@ -53,9 +53,14 @@ export default {
     async login() {
       try {
         const res = await login(this.username, this.password)
-        console.log(res)
+        // 储存token
+        this.$store.commit('setUser', res.data.body)
+        // 跳转页面
+        this.$router.push('/profile')
+        this.$toast.success('登录成功')
+        // console.log(res)
       } catch (err) {
-        console.log(err)
+        this.$toast.fail('登入失败！请检查账号密码是否正确')
       }
     },
     zhuceFn() {}
